@@ -12,7 +12,6 @@ export class TaskRepository extends Repository<Task> {
 
     
     if (status) {
-      console.log(status);
       query.andWhere('task.status = :status', { status })
     }
     
