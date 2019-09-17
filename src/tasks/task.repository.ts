@@ -1,8 +1,8 @@
-import { Task } from "./task.entity";
-import { EntityRepository, Repository } from "typeorm";
-import { TaskStatus } from "./task-status.enum";
-import { CreateTaskDto } from "./create-task.dto";
-import { GetTasksFilterDto } from "./get-tasks-filter.dto";
+import { Task } from './task.entity';
+import { EntityRepository, Repository } from 'typeorm';
+import { TaskStatus } from './task-status.enum';
+import { CreateTaskDto } from './create-task.dto';
+import { GetTasksFilterDto } from './get-tasks-filter.dto';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
@@ -10,11 +10,10 @@ export class TaskRepository extends Repository<Task> {
     const { status, search } = filterDto;
     const query = this.createQueryBuilder('task');
 
-    
     if (status) {
       query.andWhere('task.status = :status', { status })
     }
-    
+
     if (search) {
       query.orWhere('(task.title LIKE :search OR task.description like :search)', { search: `%${search}%` })
     }

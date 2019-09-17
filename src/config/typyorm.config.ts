@@ -9,4 +9,4 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: 'nestjs',
   entities: [ __dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: true
-}
+};
