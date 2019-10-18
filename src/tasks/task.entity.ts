@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { User } from '../auth/user.entity';
 
@@ -21,4 +21,10 @@ export class Task extends BaseEntity {
 
   @Column()
   userId: number;
+
+  @CreateDateColumn({ name: 'created_at', nullable: true })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at', nullable: true })
+  updatedAt: Date;
 }
