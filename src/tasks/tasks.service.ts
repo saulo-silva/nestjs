@@ -12,21 +12,17 @@ import { User } from '../auth/user.entity';
 export class TasksService {
   constructor(
     @InjectRepository(TaskRepository)
-    private taskRepository: TaskRepository
+    private taskRepository: TaskRepository,
   ) {}
 
-  getTasks(
-    filterDto: GetTasksFilterDto,
-    user: User,
-  ): Promise<Task[]> {
+  getTasks(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
     return this.taskRepository.getTasks(filterDto, user);
   }
 
-  async getTaskById(
-    id: number,
-    user: User,
-  ): Promise<Task> {
-    const found = await this.taskRepository.findOne({ where: { id, userId: user.id } });
+  async getTaskById(id: number, user: User): Promise<Task> {
+    const found = await this.taskRepository.findOne({
+      where: { id, userId: user.id },
+    });
 
     if (!found) {
       throw new NotFoundException(`Task with ID "${id}" not found.`);
@@ -39,10 +35,7 @@ export class TasksService {
     return this.taskRepository.createTask(createTaskDto, user);
   }
 
-  async deleteTask(
-    id: number,
-    user: User,
-  ) {
+  async deleteTask(id: number, user: User) {
     const result = await this.taskRepository.delete({ id, userId: user.id });
 
     if (result.affected === 0) {
